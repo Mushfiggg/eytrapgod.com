@@ -77,51 +77,126 @@ st.set_page_config(
     initial_sidebar_state="collapsed",
 )
 
-# ============== BJORK TARZI TEMA ==============
+# ============== AVANT-GARDE TEMA: Aurora, Glassmorphism, Erimiş tipografi ==============
 st.markdown("""
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Libre+Baskerville:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Creepster&family=Rubik+Wet+Paint&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<div class="aurora-bg" aria-hidden="true"></div>
 <style>
-    .stApp { background: #0a0a0a !important; }
-    .main .block-container { max-width: 100%; padding: 0 2rem 2rem; }
-    /* Sağ stream alanı – sabit, bjork tarzı */
+    /* Minimalizm: Streamlit fazlalıklarını gizle */
+    #MainMenu, footer, header, [data-testid="stHeader"], [data-testid="stToolbar"], [data-testid="stDecoration"] { visibility: hidden !important; display: none !important; }
+    .stApp { background: transparent !important; }
+    .main .block-container { max-width: 100%; padding: 0 2rem 3rem; }
+
+    /* Canlı arka plan: Gradient Mesh / Aurora (Koyu Mor, Siyah, Koyu Yeşil) */
+    .aurora-bg {
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+        z-index: -1; pointer-events: none;
+        background: linear-gradient(135deg, #0a0a0a 0%, #1a0a2e 20%, #0d1f0d 40%, #0a0a0a 60%, #1a0a2e 80%, #0d1f0d 100%);
+        background-size: 400% 400%;
+        animation: aurora 18s ease-in-out infinite;
+    }
+    @keyframes aurora {
+        0%, 100% { background-position: 0% 50%; opacity: 1; }
+        33% { background-position: 100% 50%; opacity: 0.95; }
+        66% { background-position: 50% 100%; opacity: 1; }
+    }
+
+    /* Glassmorphism: yarı saydam, blur, ince neon kenar */
+    .glass {
+        background: rgba(10, 10, 20, 0.12);
+        backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+        border: 1px solid rgba(180, 100, 255, 0.15);
+        border-radius: 16px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    }
+    .glass-strong {
+        background: rgba(10, 10, 20, 0.2);
+        backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+        border: 1px solid rgba(100, 255, 150, 0.12);
+        border-radius: 16px;
+    }
+
+    /* Sağ stream – glassmorphism */
     .stream-column {
         position: fixed; top: 0; right: 0; width: 140px; height: 100vh;
-        background: #0a0a0a; border-left: 1px solid #222;
+        background: rgba(10, 10, 20, 0.15);
+        backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+        border-left: 1px solid rgba(180, 100, 255, 0.2);
         display: flex; flex-direction: column; align-items: center; justify-content: center;
         padding: 2rem 0; z-index: 100;
     }
     .stream-brand {
-        font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; letter-spacing: 0.35em;
-        color: #fff; writing-mode: vertical-rl; text-orientation: mixed;
+        font-family: 'Creepster', cursive;
+        font-size: 1.5rem; letter-spacing: 0.2em;
+        color: rgba(255,255,255,0.95);
+        writing-mode: vertical-rl; text-orientation: mixed;
         transform: rotate(180deg); margin-bottom: 2rem;
+        text-shadow: 0 0 20px rgba(180,100,255,0.3);
     }
     .stream-menu { display: flex; flex-direction: column; gap: 0.75rem; text-align: center; }
     .stream-menu a {
-        font-family: 'Libre Baskerville', serif; font-size: 0.85rem; color: #888;
+        font-family: 'Space Mono', monospace; font-size: 0.8rem; color: rgba(200,200,220,0.7);
         text-decoration: none; text-transform: lowercase;
+        transition: color 0.2s, text-shadow 0.2s;
     }
-    .stream-menu a:hover { color: #fff; }
-    /* Ana içerik alanı – stream için sağda boşluk bırak */
+    .stream-menu a:hover { color: #fff; text-shadow: 0 0 10px rgba(180,100,255,0.5); }
+
+    /* Ana içerik – glass kartlar */
     .site-main { margin-right: 160px; min-height: 80vh; }
-    .site-hero { padding: 4rem 0 3rem; }
+    .site-hero {
+        padding: 3rem 2rem 2.5rem; margin-bottom: 1.5rem;
+        background: rgba(10, 10, 20, 0.12);
+        backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+        border: 1px solid rgba(180, 100, 255, 0.15);
+        border-radius: 20px;
+    }
+    /* İmza: devasa, ortalanmış, erimiş font */
     .site-hero h1 {
-        font-family: 'Bebas Neue', sans-serif; font-size: clamp(3rem, 12vw, 8rem);
-        letter-spacing: 0.08em; color: #fff; margin: 0 0 0.5rem;
+        font-family: 'Creepster', cursive;
+        font-size: clamp(3.5rem, 18vw, 10rem);
+        letter-spacing: 0.02em; color: rgba(255,255,255,0.98);
+        margin: 0 0 0.5rem; text-align: center;
+        text-shadow: 0 0 40px rgba(180,100,255,0.25);
     }
     .site-hero .subtitle {
-        font-family: 'Libre Baskerville', serif; font-size: 1rem; color: #666;
-        text-transform: lowercase; letter-spacing: 0.2em;
+        font-family: 'Space Mono', monospace; font-size: 0.95rem;
+        color: rgba(180, 200, 200, 0.8); text-align: center;
+        text-transform: lowercase; letter-spacing: 0.25em;
     }
-    .site-section { padding: 2rem 0; border-top: 1px solid #1a1a1a; }
+    .site-section {
+        padding: 2rem 2rem; margin-bottom: 1.5rem;
+        background: rgba(10, 10, 20, 0.1);
+        backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(100, 255, 150, 0.1);
+        border-radius: 16px;
+    }
     .site-section h2 {
-        font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; letter-spacing: 0.3em;
-        color: #444; margin-bottom: 1rem;
+        font-family: 'Rubik Wet Paint', cursive; font-size: 1.1rem; letter-spacing: 0.2em;
+        color: rgba(200, 220, 255, 0.9); margin-bottom: 1rem;
     }
     .site-section p {
-        font-family: 'Libre Baskerville', serif; font-size: 1rem; color: #999;
-        line-height: 1.7; max-width: 520px;
+        font-family: 'Space Mono', monospace; font-size: 0.95rem;
+        color: rgba(200, 210, 220, 0.85); line-height: 1.75; max-width: 520px;
     }
-    #MainMenu, footer, header { visibility: hidden !important; }
+    /* Admin alanı + input glass */
+    .admin-glass-wrap { padding: 1.5rem; margin-top: 2rem; border-radius: 16px;
+        background: rgba(10, 10, 20, 0.15); backdrop-filter: blur(14px);
+        border: 1px solid rgba(180, 100, 255, 0.15);
+    }
+    [data-testid="stTextInput"] input, [data-testid="stTextInput"] div {
+        background: rgba(20, 20, 40, 0.25) !important;
+        backdrop-filter: blur(8px); border: 1px solid rgba(180, 100, 255, 0.2) !important;
+        color: #e8e8f0 !important; border-radius: 12px !important;
+    }
+    .stButton > button {
+        background: rgba(30, 20, 50, 0.4) !important;
+        backdrop-filter: blur(8px); border: 1px solid rgba(180, 100, 255, 0.3) !important;
+        color: #e8e8f0 !important; border-radius: 12px !important;
+    }
+    .stButton > button:hover {
+        border-color: rgba(180, 100, 255, 0.6) !important;
+        box-shadow: 0 0 16px rgba(180, 100, 255, 0.2) !important;
+    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -230,9 +305,16 @@ st.markdown(f"""
 </div>
 """, unsafe_allow_html=True)
 
-# Admin girişi için küçük link (sayfa altında)
-st.markdown("<div style='margin-top: 4rem; padding-top: 2rem; border-top: 1px solid #1a1a1a;'>", unsafe_allow_html=True)
-st.caption("Site yönetimi için sol menüden Admin şifresi ile giriş yapabilirsin.")
+# Admin girişi – glassmorphism kutusu
+st.markdown("<div class='admin-glass-wrap'>", unsafe_allow_html=True)
+st.markdown("**Admin** – Site içeriğini düzenlemek için şifre ile giriş yap.")
+admin_pwd_main = st.text_input("Şifre", type="password", key="admin_pwd_main", placeholder="Admin şifresi", label_visibility="collapsed")
+if st.button("Giriş", key="admin_login_btn"):
+    if admin_pwd_main and admin_pwd_main.strip() == get_admin_password().strip():
+        set_admin_logged_in(True)
+        st.rerun()
+    else:
+        st.error("Yanlış şifre.")
 st.markdown("</div>", unsafe_allow_html=True)
 
 st.markdown("</div>", unsafe_allow_html=True)
